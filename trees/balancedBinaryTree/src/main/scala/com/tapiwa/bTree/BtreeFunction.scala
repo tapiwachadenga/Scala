@@ -1,27 +1,27 @@
 package com.tapiwa.bTree
 
-class BtreeFunction[T]
+class BtreeFunction
 {
-    def init[T](list: List[T], btree: BTree[T]): Unit =
+    def init(list: List[Int], btree: BTree[Int]): BTree[Int] =
     {
         var last = list.length
       
-        def create[T <% Ordered[T]](list: List[T], btree: BTree[T], start: Int, last: Int): BTree[T] = 
+        def create(list: List[Int], btree: BTree[Int], start: Int, last: Int): BTree[Int] = 
         {
             var mid = (start + last) / 2
-
+            // println(mid)
             list match 
             {
               case Nil => Leaf()
               case v::vs => 
               {
-                              if (v == list(mid)) Branch(v, Leaf(), Leaf())
-                              else if (v < list(mid)) Branch(v, create(vs, btree, start, (mid - 1)), btree)
-                              else Branch(v, btree, create(vs, btree, (mid + 1), last))
+                              if (v == list(mid)) {println(v);Branch(v, Leaf(), Leaf())}
+                              else if (v < list(mid))  {println(v);Branch(v, create(vs, btree, start, (mid - 1)), btree)}
+                              else  {println(v);Branch(v, btree, create(vs, btree, (mid + 1), last))}
               }
             }
         }
-        // create(list, btree, 0, last)
-        for (x<-3 to 10) yield {s"$x "}
+        create(list, btree, 0, last)
+        // for (x<-3 to 10) yield {s"$x "}
     }
 }
