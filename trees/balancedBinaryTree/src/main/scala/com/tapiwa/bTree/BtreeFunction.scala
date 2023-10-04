@@ -7,6 +7,8 @@ class BtreeFunction
         import Ordering.Implicits._
 
         var last = list.length
+        // var value: T = _
+        // var btree: BTree[T] = Branch(value, Leaf, Leaf)
       
         def create(list: List[T], btree: BTree[T], start: Int, last: Int): BTree[T] = 
         {
@@ -18,8 +20,8 @@ class BtreeFunction
               case v::vs => 
               {
                   if (v == list(mid)) Branch(v, Leaf, Leaf)
-                  else if (v < list(mid)) Branch(v, create(vs, btree, start, (mid - 1)), btree)
-                  else Branch(v, btree, create(vs, btree, (mid + 1), last))
+                  else if (v > list(mid)) Branch(v, btree, create(vs, btree, (mid + 1), last))
+                  else Branch(v, create(vs, btree, start, (mid - 1)), btree)
               }
             }
         }
