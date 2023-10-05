@@ -12,14 +12,14 @@ class BtreeFunction
       
         def create(list: List[T], btree: BTree[T], start: Int, last: Int): BTree[T] = 
         {
-            var mid = (start + last) / 2
-            println(mid)
+            var mid = last / 2
+            // println(mid)
             list match 
             {
               case Nil => Leaf
               case v::vs => 
               {
-                  if (v == list(mid)) Branch(v, Leaf, Leaf)
+                  if (v == list(mid)) {printf("%d ", v);Branch(v, Leaf, Leaf)}
                   else if (v > list(mid)) Branch(v, btree, create(vs, btree, (mid + 1), last))
                   else Branch(v, create(vs, btree, start, (mid - 1)), btree)
               }
